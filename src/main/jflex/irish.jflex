@@ -146,7 +146,7 @@ ENGWORD = {Letter} {Letter}+ "'s"
 
 XMLPUNCT = ( "\"" | "'" | "/" | "=" | "_" | "." | "?" )
 
-NOTYPO = {Space} "at" \u00E1 ( "imidne" | "imid" | "imse" | "im" | "thar" | " t" \u00FA | " siad" )+
+NOTYPO = {Space} "at" \u00E1 ( "imidne" | "imid" | "imse" | "im" | "thar" | " t" \u00FA | " siad" )?
 
 DIVTAG = ( "<div" | "<speaker_turn" | "<lb" | "<pb" | "<L" ) ( {Space} | {XMLPUNCT} | {Digit} | {Letter} )+ ">"
 
