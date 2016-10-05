@@ -36,18 +36,17 @@ public class IrishTokeniser {
         try {
             while((ntok = tokeniser.getNextToken()) != IrishTokeniserImpl.YYEOF) {
                 String cur = tokeniser.getText();
-                if(ntok == 3) {
-                    cur = cur.replaceAll("’", "'");
-                    // FIXME: do this better
-                    if(cur.equals("'na ")) {
-                        toks.add("'na");
-                        toks.add(" ");
-                    } else if(cur.equals("'n")) {
-                        toks.add("'n");
+                if (ntok == 3) {
+                    cur = cur.replaceAll("\u2019", "'");
+                    if (cur.startsWith("'n")) {
+                        toks.add(cur.substring(0, cur.length()-1));
                         toks.add(" ");
                     } else {
                         toks.add(cur);
                     }
+                } else if (ntok == 13) {
+                    toks.add(" ");
+                    toks.add(cur.substring(1));
                 } else {
                     toks.add(cur);
                 }

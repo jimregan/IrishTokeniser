@@ -87,18 +87,18 @@ CONT = ( "mb" {APOS} | "MB" {APOS} | "b" {APOS} | "B" {APOS} | "d" {APOS}
  | "D" {APOS} | "dh" {APOS} | "DH" {APOS} | "m" {APOS} | "M" {APOS}
  | "ana-" | "an-" | "a dh" {APOS} | "A dh" {APOS} | "a" {APOS} "m"
  | "a" {APOS} "at" | "dod" {APOS} | "lem" {APOS} | "s" {APOS} | "S" {APOS}
- | {APOS} "na " | {APOS} "n " | "ars" {APOS} | "a" {APOS} "s" | "a" {APOS}
+ | {APOS} "na" {Space} | {APOS} "n" {Space}
+ | "ars" {APOS} | "a" {APOS} "s" | "a" {APOS}
  | "n" {APOS} | "N" {APOS} )
 
-APOS = ( "'" | "’" )
+APOS = ( "'" | \u2019 )
 PTAG = ( "<p>" | "</p>" | "<s>" | "</s>"
 | "<title>" | "</title>"
 | "<caption>" | "</caption>"
 | "<head>" | "</head>"
 | "</hi>" | "<hi rend=" {XMLQUOTE} "bo" {XMLQUOTE} ">"
 | "<hi rend=" {XMLQUOTE} "it" {XMLQUOTE} ">"
-| "<gap/>"
-| "<gap>"
+| "<gap/>" | "<gap>" | "</gap>"
 | "<gap desc=" {XMLQUOTE} "Old Irish" {XMLQUOTE} "/>"
 | "<gap desc=" {XMLQUOTE} "english text" {XMLQUOTE} "/>"
 | "<gap desc=" {XMLQUOTE} "german text" {XMLQUOTE} "/>"
@@ -129,6 +129,27 @@ PTAG = ( "<p>" | "</p>" | "<s>" | "</s>"
 | "</speaker_turn>" )
 XMLQUOTE = ("\"" | "'")
 
+WEB = ( "http://" | "www")
+AlphaNum = ( {Letter} | {Digit} )
+WEBADDR = ( ( {AlphaNum}+ ("." {AlphaNum}+) )+ "@" ( {AlphaNum}+ "." ) {AlphaNum}+ )
+          | ( {WEB} ( {AlphaNum}+ "." )+ {AlphaNum}+ )
+
+// Why no M?
+Roman = ( "i" | "v" | "x" | "l" | "c" )
+URoman = ( "I" | "V" | "X" | "L" | "C" )
+
+NONSTD = "^" ( {Letter} | "'" | "-" | {Space} )+ "^"
+
+MUTWORD = ( "t" | "n") "-" {Char}+
+
+ENGWORD = {Letter} {Letter}+ "'s"
+
+XMLPUNCT = ( "\"" | "'" | "/" | "=" | "_" | "." | "?" )
+
+NOTYPO = {Space} "at" \u00E1 ( "imidne" | "imid" | "imse" | "im" | "thar" | " t" \u00FA | " siad" )+
+
+DIVTAG = ( "<div" | "<speaker_turn" | "<lb" | "<pb" | "<L" ) ( {Space} | {XMLPUNCT} | {Digit} | {Letter} )+ ">"
+
 %{
 
     public final int yychar() {
@@ -143,6 +164,7 @@ XMLQUOTE = ("\"" | "'")
 %%
 
 <<EOF>> { return -1; }
+{NOTYPO} { return 13 ; }
 {SYMBOL} { return 5; }
 {Space} { return 4; }
 {CONT} { return 3; }
@@ -150,3 +172,8 @@ XMLQUOTE = ("\"" | "'")
 {ABBR} { return 2; }
 {PTAG} { return 7; }
 {WORD} { return 0; }
+{WEBADDR} { return 8; }
+{DIVTAG} { return 9 ; }
+{ENGWORD} { return 10 ; }
+{MUTWORD} { return 11 ; }
+{NONSTD} { return 12 ; }
