@@ -253,22 +253,22 @@ MWEENG = ( ([Yy][Oo][Uu] {Space} [Kk][Nn][Oo][Ww] {Space} [Ww][Hh][Aa][Tt] {Spac
 
 %{
 
-    public final int TOKEN_WORD = 0;
-    public final int TOKEN_CHILDES = 1;
-    public final int TOKEN_ABBR = 2;
-    public final int TOKEN_CONT = 3;
-    public final int TOKEN_SPACE = 4;
-    public final int TOKEN_SYMBOL = 5;
+    public static final int TOKEN_WORD = 0;
+    public static final int TOKEN_CHILDES = 1;
+    public static final int TOKEN_ABBR = 2;
+    public static final int TOKEN_CONT = 3;
+    public static final int TOKEN_SPACE = 4;
+    public static final int TOKEN_SYMBOL = 5;
 
-    public final int TOKEN_PTAG = 7;
-    public final int TOKEN_WEBADDR = 8;
-    public final int TOKEN_DIVTAG = 9;
-    public final int TOKEN_ENGWORD = 10;
-    public final int TOKEN_MUTWORD = 11;
-    public final int TOKEN_NONSTD = 12;
-    public final int TOKEN_NOTYPO = 13;
-    public final int TOKEN_MWE = 14;
-    public final int TOKEN_MWEENG = 15;
+    public static final int TOKEN_PTAG = 7;
+    public static final int TOKEN_WEBADDR = 8;
+    public static final int TOKEN_DIVTAG = 9;
+    public static final int TOKEN_ENGWORD = 10;
+    public static final int TOKEN_MUTWORD = 11;
+    public static final int TOKEN_NONSTD = 12;
+    public static final int TOKEN_NOTYPO = 13;
+    public static final int TOKEN_MWE = 14;
+    public static final int TOKEN_MWEENG = 15;
 
     public final int yychar() {
         return yychar;
