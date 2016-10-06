@@ -150,6 +150,36 @@ NOTYPO = {Space} "at" \u00E1 ( "imidne" | "imid" | "imse" | "im" | "thar" | " t"
 
 DIVTAG = ( "<div" | "<speaker_turn" | "<lb" | "<pb" | "<L" ) ( {Space} | {XMLPUNCT} | {Digit} | {Letter} )+ ">"
 
+AFADA = (\u00C1 | \u00E1)
+EFADA = (\u00C9 | \u00E9)
+IFADA = (\u00CD | \u00ED)
+OFADA = (\u00D3 | \u00F3)
+UFADA = (\u00DA | \u00FA)
+
+MWE = ( ([Mm][Aa][Rr] {Space} [Aa] {Space} [Dd]{EFADA}[Aa][Rr][Ff]{AFADA})
+| ([Aa][Rr] {Space} [Aa][Ii][Ss])
+| ([Aa][Rr] {Space} [Ff][Ee][Aa][Dd][Hh])
+| ([Aa][Rr] {Space} [Ff][Uu][Dd])
+| ([Aa][Rr] {Space} [Ll][Oo][Rr][Gg])
+| ([Aa][Rr] {Space} [Nn]{OFADA}[Ss])
+| ([Aa][Rr] {Space} [Ss][Oo][Nn])
+| ( [Cc]{EFADA}({Space} [Ii])?[Ss] {Space} [Mm]([Oo] | {OFADA})[Ii][Tt][Ee] )
+| ( [Cc][Hh][Uu][Nn] {Space} [Gg][Oo] )
+| ([Dd][Ee] {Space} [Bb][Hh][Aa][Rr])
+| ([Dd] {APOS} [Aa][Ii][Nn][Nn][Ee][Oo][Ii][Nn])
+| ([Dd]{AFADA} {Space} [Bb][Hh][Aa][Rr][Rr] {Space} [Ss][Ii][Nn])
+| ([Dd][Ee] {Space} [Bb][Hh][Aa][Rr][Rr])
+| ([Dd][Ee] {Space} [Cc][Hh][Oo][Ii][Ss]) )
+
+MWEENG = ( ([Yy][Oo][Uu] {Space} [Kk][Nn][Oo][Ww] {Space} [Ww][Hh][Aa][Tt] {Space} [Ii] {Space} [Mm][Ee][Aa][Nn])
+| ([Yy][Oo][Uu] {Space} [Kk][Nn][Oo][Ww])
+| ([Dd] {APOS} [Yy][Oo][Uu] {Space} [Kk][Nn][Oo][Ww])
+| ([Ii] {Space} [Mm][Ee][Aa][Nn])
+| ([Ii] {Space} [Ss][Uu][Pp][Pp][Oo][Ss][Ee])
+| ([Ff][Aa][Ii][Rr] {Space} [Pp][Ll][Aa][Yy])
+| ([Nn][Oo] {Space} [Ww][Aa][Yy])
+| ([Ss][Oo][Rr][Tt] {Space} [Oo][Ff]) )
+
 %{
 
     public final int yychar() {
@@ -177,3 +207,5 @@ DIVTAG = ( "<div" | "<speaker_turn" | "<lb" | "<pb" | "<L" ) ( {Space} | {XMLPUN
 {ENGWORD} { return 10 ; }
 {MUTWORD} { return 11 ; }
 {NONSTD} { return 12 ; }
+{MWE} { return 14 ; }
+{MWEENG} { return 15 ; }
