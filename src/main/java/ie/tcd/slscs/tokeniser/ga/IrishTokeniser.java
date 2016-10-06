@@ -36,7 +36,7 @@ public class IrishTokeniser {
         try {
             while((ntok = tokeniser.getNextToken()) != IrishTokeniserImpl.YYEOF) {
                 String cur = tokeniser.getText();
-                if (ntok == 3) {
+                if (ntok == tokeniser.TOKEN_CONT) {
                     cur = cur.replaceAll("\u2019", "'");
                     if (cur.startsWith("'n")) {
                         toks.add(cur.substring(0, cur.length()-1));
@@ -44,7 +44,7 @@ public class IrishTokeniser {
                     } else {
                         toks.add(cur);
                     }
-                } else if (ntok == 13) {
+                } else if (ntok == tokeniser.TOKEN_NOTYPO) {
                     toks.add(" ");
                     toks.add(cur.substring(1));
                 } else {

@@ -253,6 +253,23 @@ MWEENG = ( ([Yy][Oo][Uu] {Space} [Kk][Nn][Oo][Ww] {Space} [Ww][Hh][Aa][Tt] {Spac
 
 %{
 
+    public final int TOKEN_WORD = 0;
+    public final int TOKEN_CHILDES = 1;
+    public final int TOKEN_ABBR = 2;
+    public final int TOKEN_CONT = 3;
+    public final int TOKEN_SPACE = 4;
+    public final int TOKEN_SYMBOL = 5;
+
+    public final int TOKEN_PTAG = 7;
+    public final int TOKEN_WEBADDR = 8;
+    public final int TOKEN_DIVTAG = 9;
+    public final int TOKEN_ENGWORD = 10;
+    public final int TOKEN_MUTWORD = 11;
+    public final int TOKEN_NONSTD = 12;
+    public final int TOKEN_NOTYPO = 13;
+    public final int TOKEN_MWE = 14;
+    public final int TOKEN_MWEENG = 15;
+
     public final int yychar() {
         return yychar;
     }
@@ -265,18 +282,18 @@ MWEENG = ( ([Yy][Oo][Uu] {Space} [Kk][Nn][Oo][Ww] {Space} [Ww][Hh][Aa][Tt] {Spac
 %%
 
 <<EOF>> { return -1; }
-{NOTYPO} { return 13 ; }
-{SYMBOL} { return 5; }
-{Space} { return 4; }
-{CONT} { return 3; }
-{CHILDES} { return 1; }
-{ABBR} { return 2; }
-{PTAG} { return 7; }
-{WORD} { return 0; }
-{WEBADDR} { return 8; }
-{DIVTAG} { return 9 ; }
-{ENGWORD} { return 10 ; }
-{MUTWORD} { return 11 ; }
-{NONSTD} { return 12 ; }
-{MWE} { return 14 ; }
-{MWEENG} { return 15 ; }
+{NOTYPO} { return TOKEN_NOTYPO ; }
+{SYMBOL} { return TOKEN_SYMBOL ; }
+{Space} { return TOKEN_SPACE ; }
+{CONT} { return TOKEN_CONT ; }
+{CHILDES} { return TOKEN_CHILDES ; }
+{ABBR} { return TOKEN_ABBR ; }
+{PTAG} { return TOKEN_PTAG ; }
+{WORD} { return TOKEN_WORD ; }
+{WEBADDR} { return TOKEN_WEBADDR ; }
+{DIVTAG} { return TOKEN_DIVTAG ; }
+{ENGWORD} { return TOKEN_ENGWORD ; }
+{MUTWORD} { return TOKEN_MUTWORD ; }
+{NONSTD} { return TOKEN_NONSTD ; }
+{MWE} { return TOKEN_MWE ; }
+{MWEENG} { return TOKEN_MWEENG ; }
