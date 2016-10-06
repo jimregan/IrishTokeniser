@@ -34,7 +34,7 @@ ABBR = ( "Co." |"gCo." |"Dr." |"eag." |"e.g." |"i.e." |"lch."
  | "lgh." | "Ms." | "m.sh." | "Mrs." | "Mr." | "O'" | "R.Ch."
  | "srl." | "St." | "Uas." | "uimh." | "Uimh." | "Teo."
  | "[?]"| "Ph.D" | "Msc." | ".i." )
-XMLEnt = ( "&quot;" | "&gt;" | "&lt;" )
+XMLEnt = ( "&quot;" | "&gt;" | "&lt;" | "&apos;" )
 
 Space = " "
 WORD = ({Letter}+)
@@ -83,15 +83,17 @@ ListUC = [A-Z]
 FadaUC = ( \u00C1 | \u00C9 | \u00CD | \u00D3 | \u00DA )
 FadaLC = ( \u00E1 | \u00E9 | \u00ED | \u00F3 | \u00FA )
 
-CONT = ( "mb" {APOS} | "MB" {APOS} | "b" {APOS} | "B" {APOS} | "d" {APOS}
- | "D" {APOS} | "dh" {APOS} | "DH" {APOS} | "m" {APOS} | "M" {APOS}
- | "ana-" | "an-" | "a dh" {APOS} | "A dh" {APOS} | "a" {APOS} "m"
- | "a" {APOS} "at" | "dod" {APOS} | "lem" {APOS} | "s" {APOS} | "S" {APOS}
- | {APOS} "na" {Space} | {APOS} "n" {Space}
- | "ars" {APOS} | "a" {APOS} "s" | "a" {APOS}
- | "n" {APOS} | "N" {APOS} )
+HYPH = ( "-" )
 
-APOS = ( "'" | \u2019 )
+CONT = ( [Mm][Bb] {APOS} | [Bb] {APOS} | [Dd] {APOS}
+ | [Dd][Hh] {APOS} | [Mm] {APOS} | [Aa][Nn][Aa]{HYPH}
+ | [Aa][Nn]{HYPH} | [Aa] {Space} [Dd][Hh] {APOS} | [Aa] {APOS} [Mm]
+ | [Aa] {APOS} [Aa][Tt] | [Dd][Oo][Dd] {APOS} | [Ll][Ee][Mm] {APOS}
+ | [Ss] {APOS} | {APOS} [Nn][Aa] {Space} | {APOS} [Nn] {Space}
+ | [Aa][Rr][Ss] {APOS} | [Aa] {APOS} [Ss] | [Aa] {APOS}
+ | [Nn] {APOS} )
+
+APOS = ( "'" | \u2019 | "&apos;" )
 PTAG = ( "<p>" | "</p>" | "<s>" | "</s>"
 | "<title>" | "</title>"
 | "<caption>" | "</caption>"
@@ -251,6 +253,14 @@ MWEENG = ( ([Yy][Oo][Uu] {Space} [Kk][Nn][Oo][Ww] {Space} [Ww][Hh][Aa][Tt] {Spac
 | ([Nn][Oo] {Space} [Ww][Aa][Yy])
 | ([Ss][Oo][Rr][Tt] {Space} [Oo][Ff]) )
 
+NotPron = ( [A-Z] | [a-z] | {AFADA} | {OFADA} | {UFADA} )
+InitLetter = ( [A-Z] | [a-z] | {AFADA} | {EFADA} | {IFADA} | {OFADA} | {UFADA} )
+
+INIT = ( {InitLetter} "." ({InitLetter} ".") | ({NotPron} ".") )
+NUM = ( "IRP"? ( {Digit} | {NumOp} | {NumSep} )+ {Digit} "%" | "#" {Digit}+ )
+//ITEM = ( !({NumOp}|{Letter}|{Digit}|{SINGLE}|"(") ( {Letter}| {Digit}+ | {Roman}+ | {URoman}+ ) ")" )
+ITEM = ( ( {Letter}| {Digit}+ | {Roman}+ | {URoman}+ ) ")" )
+
 %{
 
     public static final int TOKEN_WORD = 0;
@@ -259,7 +269,7 @@ MWEENG = ( ([Yy][Oo][Uu] {Space} [Kk][Nn][Oo][Ww] {Space} [Ww][Hh][Aa][Tt] {Spac
     public static final int TOKEN_CONT = 3;
     public static final int TOKEN_SPACE = 4;
     public static final int TOKEN_SYMBOL = 5;
-
+    public static final int TOKEN_XMLENT = 6;
     public static final int TOKEN_PTAG = 7;
     public static final int TOKEN_WEBADDR = 8;
     public static final int TOKEN_DIVTAG = 9;
@@ -269,6 +279,9 @@ MWEENG = ( ([Yy][Oo][Uu] {Space} [Kk][Nn][Oo][Ww] {Space} [Ww][Hh][Aa][Tt] {Spac
     public static final int TOKEN_NOTYPO = 13;
     public static final int TOKEN_MWE = 14;
     public static final int TOKEN_MWEENG = 15;
+    public static final int TOKEN_INIT = 16;
+    public static final int TOKEN_NUM = 17;
+    public static final int TOKEN_ITEM = 18;
 
     public final int yychar() {
         return yychar;
@@ -297,3 +310,7 @@ MWEENG = ( ([Yy][Oo][Uu] {Space} [Kk][Nn][Oo][Ww] {Space} [Ww][Hh][Aa][Tt] {Spac
 {NONSTD} { return TOKEN_NONSTD ; }
 {MWE} { return TOKEN_MWE ; }
 {MWEENG} { return TOKEN_MWEENG ; }
+{INIT} { return TOKEN_INIT ; }
+{NUM} { return TOKEN_NUM ; }
+{ITEM} { return TOKEN_ITEM ; }
+{XMLEnt} { return TOKEN_XMLENT ; }
