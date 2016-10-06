@@ -144,11 +144,11 @@ NONSTD = "^" ( {Letter} | "'" | "-" | {Space} )+ "^"
 
 MUTWORD = ( "t" | "n") "-" {Char}+
 
-ENGWORD = {Letter} {Letter}+ "'s"
+ENGWORD = {Letter} {Letter}+ {APOS}[Ss]
 
 XMLPUNCT = ( "\"" | "'" | "/" | "=" | "_" | "." | "?" )
 
-NOTYPO = {Space} "at" \u00E1 ( "imidne" | "imid" | "imse" | "im" | "thar" | " t" \u00FA | " siad" )?
+NOTYPO = {Space} [Aa][Tt]{AFADA} ( [Ii][Mm][Ii][Dd][Nn][Ee] | [Ii][Mm][Ii][Dd] | [Ii][Mm][Ss][Ee] | [Ii][Mm] | [Tt][Hh][Aa][Rr] | {Space} [Tt]{UFADA} | {Space} [Ss][Ii][Aa][Dd] )?
 
 DIVTAG = ( "<div" | "<speaker_turn" | "<lb" | "<pb" | "<L" ) ( {Space} | {XMLPUNCT} | {Digit} | {Letter} )+ ">"
 
