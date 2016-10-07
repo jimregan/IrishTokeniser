@@ -48,4 +48,23 @@ public class StringUtilsTest {
         assertEquals(false, StringUtils.isIrishUpperVowel('b'));
     }
 
+    @Test
+    public void stripDots() throws Exception {
+        assertEquals("BbCcDdFfGgMmPpSsTt", StringUtils.stripDots("ḂḃĊċḊḋḞḟĠġṀṁṖṗṠṡṪṫ"));
+        assertEquals("should be exactly the same", StringUtils.stripDots("should be exactly the same"));
+    }
+
+    @Test
+    public void addDots() throws Exception {
+        assertEquals("ḂḃĊċḊḋḞḟĠġṀṁṖṗṠṡṪṫ", StringUtils.addDots("BbCcDdFfGgMmPpSsTt"));
+        assertEquals("uhoh", StringUtils.addDots("uhoh"));
+    }
+    @Test
+    public void removeBuailte() throws Exception {
+        assertEquals("BH", StringUtils.removeBuailte("Ḃ"));
+        assertEquals("Bha", StringUtils.removeBuailte("Ḃa"));
+        assertEquals("BHA", StringUtils.removeBuailte("ḂA"));
+        assertEquals("CHUAIGH", StringUtils.removeBuailte("ĊUAIĠ"));
+        assertEquals("uhoh", StringUtils.removeBuailte("uhoh"));
+    }
 }

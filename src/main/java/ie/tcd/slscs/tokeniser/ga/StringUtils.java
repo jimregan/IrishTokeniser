@@ -91,4 +91,143 @@ public class StringUtils {
                 return false;
         }
     }
+
+    /**
+     * Strips buailte (dotted) letters from the input string
+     * (to test removeDot)
+     * @param s
+     * @return
+     */
+    public static String stripDots(String s) {
+        String out = "";
+        for(Character c : s.toCharArray()) {
+            out += removeDot(c);
+        }
+        return out;
+    }
+    private static char removeDot(char c) {
+        switch(c) {
+            case '\u1E02':
+                return 'B';
+            case '\u1E03':
+                return 'b';
+            case '\u010A':
+                return 'C';
+            case '\u010B':
+                return 'c';
+            case '\u1E0A':
+                return 'D';
+            case '\u1E0B':
+                return 'd';
+            case '\u1E1E':
+                return 'F';
+            case '\u1E1F':
+                return 'f';
+            case '\u0120':
+                return 'G';
+            case '\u0121':
+                return 'g';
+            case '\u1E40':
+                return 'M';
+            case '\u1E41':
+                return 'm';
+            case '\u1E56':
+                return 'P';
+            case '\u1E57':
+                return 'p';
+            case '\u1E60':
+                return 'S';
+            case '\u1E61':
+                return 's';
+            case '\u1E6A':
+                return 'T';
+            case '\u1E6B':
+                return 't';
+            default:
+                return c;
+        }
+    }
+
+    /**
+     * Adds buailte (dotted) letters to the input string
+     * (to test addDot)
+     * @param s
+     * @return
+     */
+    public static String addDots(String s) {
+        String out = "";
+        for(Character c : s.toCharArray()) {
+            out += addDot(c);
+        }
+        return out;
+    }
+    private static char addDot(char c) {
+        switch(c) {
+            case 'B':
+                return '\u1E02';
+            case 'b':
+                return '\u1E03';
+            case 'C':
+                return '\u010A';
+            case 'c':
+                return '\u010B';
+            case 'D':
+                return '\u1E0A';
+            case 'd':
+                return '\u1E0B';
+            case 'F':
+                return '\u1E1E';
+            case 'f':
+                return '\u1E1F';
+            case 'G':
+                return '\u0120';
+            case 'g':
+                return '\u0121';
+            case 'M':
+                return '\u1E40';
+            case 'm':
+                return '\u1E41';
+            case 'P':
+                return '\u1E56';
+            case 'p':
+                return '\u1E57';
+            case 'S':
+                return '\u1E60';
+            case 's':
+                return '\u1E61';
+            case 'T':
+                return '\u1E6A';
+            case 't':
+                return '\u1E6B';
+            default:
+                return c;
+        }
+    }
+
+    public static String removeBuailte(String s) {
+        String out = "";
+        char[] ca = s.toCharArray();
+        for(int i = 0; i < ca.length; i++) {
+            char undotted = removeDot(ca[i]);
+            if(undotted == ca[i]) {
+                out += ca[i];
+            } else {
+                if(Character.isLowerCase(ca[i])) {
+                    out += undotted;
+                    out += 'h';
+                } else {
+                    if((i == 0 && ca.length == 1)
+                        || (i == 0 && ca.length > (i + 1) && Character.isUpperCase(ca[i + 1]))
+                        || ((i > 0) && (i == ca.length - 1) && Character.isUpperCase(ca[i - 1]))) {
+                        out += undotted;
+                        out += 'H';
+                    } else {
+                        out += undotted;
+                        out += 'h';
+                    }
+                }
+            }
+        }
+        return out;
+    }
 }
