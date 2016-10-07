@@ -270,6 +270,18 @@ Percent = ( {Number}+ "%" )
 
 %{
 
+    public class Spanlike {
+        int start;
+        int end;
+        public Spanlike(int start, int end) {
+            this.start = start;
+            this.end = end;
+        }
+        public String asText() {
+            return "[" + Integer.toString(start) + "," + Integer.toString(end) + "]";
+        }
+    }
+
     public static final int TOKEN_WORD = 0;
     public static final int TOKEN_CHILDES = 1;
     public static final int TOKEN_ABBR = 2;
@@ -298,6 +310,10 @@ Percent = ( {Number}+ "%" )
 
     public final String getText() {
         return new String(zzBuffer, zzStartRead, zzMarkedPos - zzStartRead);
+    }
+
+    public final Spanlike getSpanlike() {
+        return new Spanlike(zzStartRead, zzMarkedPos);
     }
 %}
 
