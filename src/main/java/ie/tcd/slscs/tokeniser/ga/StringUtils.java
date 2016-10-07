@@ -217,7 +217,7 @@ public class StringUtils {
                     out += 'h';
                 } else {
                     if((i == 0 && ca.length == 1)
-                        || (i == 0 && ca.length > (i + 1) && Character.isUpperCase(ca[i + 1]))
+                        || (ca.length > (i + 1) && Character.isUpperCase(ca[i + 1]))
                         || ((i > 0) && (i == ca.length - 1) && Character.isUpperCase(ca[i - 1]))) {
                         out += undotted;
                         out += 'H';

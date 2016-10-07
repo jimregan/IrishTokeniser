@@ -65,6 +65,7 @@ public class StringUtilsTest {
         assertEquals("Bha", StringUtils.removeBuailte("Ḃa"));
         assertEquals("BHA", StringUtils.removeBuailte("ḂA"));
         assertEquals("CHUAIGH", StringUtils.removeBuailte("ĊUAIĠ"));
+        assertEquals("LAGHAD", StringUtils.removeBuailte("LAĠAD"));
         assertEquals("uhoh", StringUtils.removeBuailte("uhoh"));
     }
 }
