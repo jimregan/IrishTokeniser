@@ -41,7 +41,7 @@ public class IrishTokeniserTest {
         List<String> exp3 = Arrays.asList(" ");
         String inp4 = "Dúirt";
         List<String> exp4 = Arrays.asList("Dúirt");
-        String inp5 = "m'athair";
+        String inp5 = "m&apos;athair";
         List<String> exp5 = Arrays.asList("m'", "athair");
         String inp6 = "*ABC:";
         List<String> exp6 = Arrays.asList("*ABC:");
@@ -53,6 +53,8 @@ public class IrishTokeniserTest {
         List<String> exp9 = Arrays.asList("!", "http://tcd.ie", " ", "atá");
         String inp10 = "mar a déarfá, you know";
         List<String> exp10 = Arrays.asList("mar a déarfá", ",", " ", "you know");
+        String inp11 = "IRP6%";
+        List<String> exp11 = Arrays.asList("126,33.6", " ", "xiv)");
 
         IrishTokeniser tok = new IrishTokeniser();
         List<String> out1 = tok.tokenise(inp1);
@@ -75,6 +77,8 @@ public class IrishTokeniserTest {
         assertEquals(exp9, out9);
         List<String> out10 = tok.tokenise(inp10);
         assertEquals(exp10, out10);
+        List<String> out11 = tok.tokenise(inp11);
+        assertEquals(exp11, out11);
     }
 
 }
