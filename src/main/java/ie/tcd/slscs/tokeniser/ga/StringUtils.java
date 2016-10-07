@@ -204,6 +204,12 @@ public class StringUtils {
         }
     }
 
+    /**
+     * Removes buailte (dotted) letters from older Irish text, inserting 'h'
+     * after the relevant letter if it is buailte
+     * @param s The input string
+     * @return The string with buailte letters removed
+     */
     public static String removeBuailte(String s) {
         String out = "";
         char[] ca = s.toCharArray();
@@ -229,5 +235,25 @@ public class StringUtils {
             }
         }
         return out;
+    }
+
+    public static String insertBuailte(String s) {
+        String ret = "";
+        for(int i = 0; i < s.length(); ++i) {
+            char cur = s.charAt(i);
+            char dotted = addDot(cur);
+            if(cur == dotted) {
+                ret += cur;
+            } else {
+                if((i < (s.length() - 1)) &&
+                   (s.charAt(i + 1) == 'h' || (s.charAt(i + 1) == 'H'))) {
+                    ret += dotted;
+                    i++;
+                } else {
+                    ret += cur;
+                }
+            }
+        }
+        return ret;
     }
 }

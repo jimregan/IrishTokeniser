@@ -59,6 +59,7 @@ public class StringUtilsTest {
         assertEquals("ḂḃĊċḊḋḞḟĠġṀṁṖṗṠṡṪṫ", StringUtils.addDots("BbCcDdFfGgMmPpSsTt"));
         assertEquals("uhoh", StringUtils.addDots("uhoh"));
     }
+
     @Test
     public void removeBuailte() throws Exception {
         assertEquals("BH", StringUtils.removeBuailte("Ḃ"));
@@ -67,5 +68,15 @@ public class StringUtilsTest {
         assertEquals("CHUAIGH", StringUtils.removeBuailte("ĊUAIĠ"));
         assertEquals("LAGHAD", StringUtils.removeBuailte("LAĠAD"));
         assertEquals("uhoh", StringUtils.removeBuailte("uhoh"));
+    }
+
+    @Test
+    public void insertBuailte() throws Exception {
+        assertEquals("uhoh", StringUtils.insertBuailte("uhoh"));
+        //assertEquals("Ḃ", StringUtils.insertBuailte("BH"));
+        assertEquals("Ḃa", StringUtils.insertBuailte("Bha"));
+        assertEquals("ḂA", StringUtils.insertBuailte("BHA"));
+        assertEquals("ĊUAIĠ", StringUtils.insertBuailte("CHUAIGH"));
+        assertEquals("LAĠAD", StringUtils.insertBuailte("LAGHAD"));
     }
 }
