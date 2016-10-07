@@ -73,10 +73,14 @@ public class StringUtilsTest {
     @Test
     public void insertBuailte() throws Exception {
         assertEquals("uhoh", StringUtils.insertBuailte("uhoh"));
-        //assertEquals("Ḃ", StringUtils.insertBuailte("BH"));
+        assertEquals("Ḃ", StringUtils.insertBuailte("BH"));
         assertEquals("Ḃa", StringUtils.insertBuailte("Bha"));
         assertEquals("ḂA", StringUtils.insertBuailte("BHA"));
+        assertEquals("ḃ", StringUtils.insertBuailte("bh"));
+        assertEquals("ḃa", StringUtils.insertBuailte("bha"));
+        assertEquals("ḃA", StringUtils.insertBuailte("bHA"));
         assertEquals("ĊUAIĠ", StringUtils.insertBuailte("CHUAIGH"));
         assertEquals("LAĠAD", StringUtils.insertBuailte("LAGHAD"));
+
     }
 }
