@@ -32,7 +32,7 @@ public class StringUtils {
      */
     public static String toLower(String s) {
         if(s.length() <= 1) {
-            return s;
+            return s.toLowerCase();
         }
         char first = s.charAt(0);
         if((first == 'n' || first == 't') && isIrishUpperVowel(s.charAt(1))) {
