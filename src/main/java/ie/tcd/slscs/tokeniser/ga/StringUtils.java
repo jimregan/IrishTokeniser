@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Jim O'Regan <jaoregan@tcd.ie>
+ * Copyright 2016 Trinity College, Dublin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
