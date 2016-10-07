@@ -55,8 +55,8 @@ public class IrishTokeniserTest {
         List<String> exp10 = Arrays.asList("mar a déarfá", ",", " ", "you know");
         String inp11 = "126,33.6 (xiv)1)";
         List<String> exp11 = Arrays.asList("126,33.6", " ", "(xiv)", "1)");
-        String inp12 = "US$60;65 zl";
-        List<String> exp12 = Arrays.asList("US$60", ";", "65 zl");
+        String inp12 = "US$60;65 zl6,566.55%";
+        List<String> exp12 = Arrays.asList("US$60", ";", "65 zl", "6,566.55%");
 
         IrishTokeniser tok = new IrishTokeniser();
         List<String> out1 = tok.tokenise(inp1);

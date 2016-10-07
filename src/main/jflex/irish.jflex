@@ -256,19 +256,17 @@ MWEENG = ( ([Yy][Oo][Uu] {Space} [Kk][Nn][Oo][Ww] {Space} [Ww][Hh][Aa][Tt] {Spac
 NotPron = ( [A-Z] | [a-z] | {AFADA} | {OFADA} | {UFADA} )
 InitLetter = ( [A-Z] | [a-z] | {AFADA} | {EFADA} | {IFADA} | {OFADA} | {UFADA} )
 
-//ITEM = ( (!({NumOp}|{Letter}|{Digit}|{SINGLE})|"(") ( {Letter}| {Digit}+ | {Roman}+ | {URoman}+ ) ")" )
-//ITEM = ( (!({NumOp}|{Letter}|{Digit}|{SingleCharE}|{WS})|"(") ( {Letter}| {Digit}+ | {Roman}+ | {URoman}+ ) ")" )
 ITEM = ( ("(")? ( {Letter} | {Digit}+ | {Roman}+ | {URoman}+ ) ")" )
 INIT = ( {InitLetter} "." ({InitLetter} ".") | ({NotPron} ".") )
-NUM = ( ("IRP")? ( {Digit} | {NumOp} | {NumSep} )+ {Digit} ("%")? | "#" {Digit}+ )
+NUM = ( "#" {Digit}+ )
 NumberInner = ( {Digit} | {NumOp} | {NumSep} )
-NumberSep = ( {Digit} {NumberInner}? {Digit} )
-Number = ( {Digit} | {NumberSep} )
+Number = ( {Digit} ( {NumberInner}+ {Digit} )* )
 CurrencySym = ( \u20AC | "$" | "£" | \u00A2 )
 CurrencyAbbrA = ( {ListUC} | {ListUC}{2} | {ListUC}{3} )
 CurrencyAbbr = ( {ListUC}{3} )
 CurrencyLead = ( {CurrencyAbbrA} {CurrencySym} | {CurrencyAbbr} | {CurrencySym} )
-Currency = ( {CurrencyLead} {Digit}+ {CurrencyLead}? | {Digit}+ {Space}? "zl" | {Digit}+ {Space}? "z" \u0142 )
+Currency = ( {CurrencyLead} {Number}+ {CurrencyLead}? | {Number}+ {Space}? "zl" | {Number}+ {Space}? "z" \u0142 )
+Percent = ( {Number}+ "%" )
 
 %{
 
@@ -292,6 +290,7 @@ Currency = ( {CurrencyLead} {Digit}+ {CurrencyLead}? | {Digit}+ {Space}? "zl" | 
     public static final int TOKEN_NUM = 17;
     public static final int TOKEN_ITEM = 18;
     public static final int TOKEN_CURRENCY = 19;
+    public static final int TOKEN_PERCENT = 20;
 
     public final int yychar() {
         return yychar;
@@ -322,7 +321,8 @@ Currency = ( {CurrencyLead} {Digit}+ {CurrencyLead}? | {Digit}+ {Space}? "zl" | 
 {MWE} { return TOKEN_MWE ; }
 {MWEENG} { return TOKEN_MWEENG ; }
 {INIT} { return TOKEN_INIT ; }
-{NUM} { return TOKEN_NUM ; }
 {Currency} { return TOKEN_CURRENCY ; }
+{Percent} { return TOKEN_PERCENT ; }
+{NUM} { return TOKEN_NUM ; }
 {ITEM} { return TOKEN_ITEM ; }
 {XMLEnt} { return TOKEN_XMLENT ; }
