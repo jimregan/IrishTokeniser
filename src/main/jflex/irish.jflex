@@ -31,7 +31,7 @@ package ie.tcd.slscs.tokeniser.ga;
 %char
 
 ABBR = ( "Co." |"gCo." |"Dr." |"eag." |"e.g." |"i.e." |"lch."
- | "lgh." | "Ms." | "m.sh." | "Mrs." | "Mr." | "O'" | "R.Ch."
+ | "lgh." | "Ms." | "m.sh." | "Mrs." | "Mr." | "O"{APOS} | "R.Ch."
  | "srl." | "St." | "Uas." | "uimh." | "Uimh." | "Teo."
  | "[?]"| "Ph.D" | "Msc." | ".i." )
 XMLEnt = ( "&quot;" | "&gt;" | "&lt;" | "&apos;" )
@@ -244,9 +244,7 @@ MWE = ( ([Mm][Aa][Rr] {Space} [Aa] {Space} [Dd]{EFADA}[Aa][Rr][Ff]{AFADA})
 | ( {OFADA} {Space} [Dd][Hh][Ee][Aa][Ss] )
 | ( {OFADA} {Space} [Tt][Hh][Uu][Aa][Ii][Dd][Hh] ) )
 
-MWEENG = ( ([Yy][Oo][Uu] {Space} [Kk][Nn][Oo][Ww] {Space} [Ww][Hh][Aa][Tt] {Space} [Ii] {Space} [Mm][Ee][Aa][Nn])
-| ([Yy][Oo][Uu] {Space} [Kk][Nn][Oo][Ww])
-| ([Dd] {APOS} [Yy][Oo][Uu] {Space} [Kk][Nn][Oo][Ww])
+MWEENG = ( ( ([Dd] {APOS})?[Yy][Oo][Uu] {Space} [Kk][Nn][Oo][Ww] ({Space} [Ww][Hh][Aa][Tt] {Space} [Ii] {Space} [Mm][Ee][Aa][Nn])?)
 | ([Ii] {Space} [Mm][Ee][Aa][Nn])
 | ([Ii] {Space} [Ss][Uu][Pp][Pp][Oo][Ss][Ee])
 | ([Ff][Aa][Ii][Rr] {Space} [Pp][Ll][Aa][Yy])
