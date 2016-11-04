@@ -42,7 +42,7 @@ XMLEnt = ( "&quot;" | "&gt;" | "&lt;" | "&apos;" )
 Space = " "
 WORD = ({Letter}+)
 //WORD = {Char}+
-Char = !({WS} | {SINGLE})
+//Char = !({WS} | {SINGLE})
 SINGLE = ({SingleCharE} | {SingleCharM})
 SYMBOL = ({SINGLE} | {PUNCT})
 // Opening single quote only, because closing can be used for apostrophe
@@ -145,7 +145,7 @@ URoman = ( "I" | "V" | "X" | "L" | "C" )
 
 NONSTD = "^" ( {Letter} | "'" | "-" | {Space} )+ "^"
 
-MUTWORD = ( "t" | "n") "-" {Char}+
+MUTWORD = ( "t" | "n") "-" {Letter}+
 
 ENGWORD = {Letter} {Letter}+ {APOS}[Ss]
 
