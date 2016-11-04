@@ -25,7 +25,69 @@
 
 package ie.tcd.slscs.itut.tokeniser.ga;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 public class StringUtils {
+    static final Map<String, String> recase;
+    static {
+        Map<String, String> recasetmp = new HashMap<String, String>();
+        recasetmp.put("áth cliath", "Áth Cliath");
+        recasetmp.put("baile átha cliath", "Baile Átha Cliath");
+        recasetmp.put("contae átha cliath", "Contae Átha Cliath");
+        recasetmp.put("cill chainnigh", "Cill Chainnigh");
+        recasetmp.put("gcill chainnigh", "gCill Chainnigh");
+        recasetmp.put("chill chainnigh", "Chill Chainnigh");
+        recasetmp.put("cill dara", "Cill Dara");
+        recasetmp.put("chill dara", "Chill Dara");
+        recasetmp.put("gcill dara", "gCill Dara");
+        recasetmp.put("cill mhantáin", "Cill Mhantáin");
+        recasetmp.put("chill mhantáin", "Chill Mhantáin");
+        recasetmp.put("gcill mhantáin", "gCill Mhantáin");
+        recasetmp.put("loch garman", "Loch Garman");
+        recasetmp.put("uíbh fháilí", "Uíbh Fháilí");
+        recasetmp.put("port láirge", "Port Láirge");
+        recasetmp.put("phort láirge", "Phort Láirge");
+        recasetmp.put("bport láirge", "bPort Láirge");
+        recasetmp.put("tiobraid árann", "Tiobraid Árann");
+        recasetmp.put("dtiobraid árann", "dTiobraid Árann");
+        recasetmp.put("thiobraid árann", "Thiobraid Árann");
+        recasetmp.put("maigh eo", "Maigh Eo");
+        recasetmp.put("mhaigh eo", "Mhaigh Eo");
+        recasetmp.put("ros comáin", "Ros Comáin");
+        recasetmp.put("ard mhacha", "Ard Mhacha");
+        recasetmp.put("dún na ngall", "Dún na nGall");
+        recasetmp.put("dhún na ngall", "Dhún na nGall");
+        recasetmp.put("ndún na ngall", "nDún na nGall");
+        recasetmp.put("fear manach", "Fear Manach");
+        recasetmp.put("bhfear manach", "bhFear Manach");
+        recasetmp.put("fhear manach", "Fhear Manach");
+        recasetmp.put("tír eoghain", "Tír Eoghain");
+        recasetmp.put("thír eoghain", "Thír Eoghain");
+        recasetmp.put("dtír eoghain", "dTír Eoghain");
+        recasetmp.put("béal feirste", "Béal Feirste");
+        recasetmp.put("mbéal feirste", "mBéal Feirste");
+        recasetmp.put("bhéal feirste", "Bhéal Feirste");
+        recasetmp.put("caisleán riabhach", "Caisleán Riabhach");
+        recasetmp.put("chaisleán riabhach", "Chaisleán Riabhach");
+        recasetmp.put("gcaisleán riabhach", "gCaisleán Riabhach");
+        recasetmp.put("sinn féin", "Sinn Féin");
+        recasetmp.put("fianna fáil", "Fianna Fáil");
+        recasetmp.put("fine gael", "Fine Gael");
+        recasetmp.put("lucht oibre", "Lucht Oibre");
+        recase = Collections.unmodifiableMap(recasetmp);
+    }
+
+    /**
+     * Returns the correctly cased version of the multiword entry,
+     * for use with the morphological analyser.
+     * @param s The string to recase
+     * @return Correctly cased MWE
+     */
+    public static String recaseMWE(String s) {
+        return recase.get(s.toLowerCase());
+    }
     /**
      * toLower, but for Irish strings: if the word begins with 'n' or 't',
      * followed by a vowel, the lowercase string must have a hyphen after
