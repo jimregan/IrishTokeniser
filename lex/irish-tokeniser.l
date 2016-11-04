@@ -93,9 +93,9 @@ SingleCharMGG1	({SingleCharMG1}|{SingleCharMG2}|{SingleCharMG3}|{SingleCharMG4})
 SingleCharMGG2	({SingleCharMG6}|{SingleCharMG7}|{SingleCharMG8})
 SingleCharM	({SingleCharMGG1}|{SingleCharMGG2})
 
-WEB	(http:\/\/|www)
+WEB	(http:\/\/|www\.)
 AlphaNum	({Letter}|{Digit})
-Email	({AlphaNum}+(\.{AlphaNum}+))+@({AlphaNum}+\.){AlphaNum}+
+Email	({AlphaNum}+(\.{AlphaNum}+)?)+\@({AlphaNum}+\.)+{AlphaNum}+
 URIWeb	{WEB}({AlphaNum}+\.)+{AlphaNum}+
 WEBADDR	{Email}|{URIWeb}
 Roman	[ivxlc]
@@ -277,7 +277,7 @@ PTAG	({PTAG1}|{PTAG2}|{PTAG3}|{PTAG4}|{PTAG5}|{PTAG6}|{PTAG7})
 
 {PTAG}	printf("PTAG: %s\n", yytext);
 
-{URIWeb}	printf("URIWeb: %s\n", yytext);
+{WEBADDR}	printf("URIWeb: %s\n", yytext);
 
 {Char}	printf("Char: %s\n", yytext);
 
