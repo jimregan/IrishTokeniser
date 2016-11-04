@@ -50,6 +50,8 @@ public class IrishTokeniser {
                 } else if (ntok == IrishTokeniserImpl.TOKEN_NOTYPO) {
                     toks.add(" ");
                     toks.add(cur.substring(1));
+                } else if (ntok == IrishTokeniserImpl.TOKEN_PLACE || ntok == IrishTokeniserImpl.TOKEN_ORG) {
+                    toks.add(StringUtils.recaseMWE(cur));
                 } else {
                     toks.add(cur);
                 }

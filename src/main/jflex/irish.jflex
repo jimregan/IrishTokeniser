@@ -288,6 +288,11 @@ MWEPLACES = ( ( {AFADA}[Tt][Hh] {Space} [Cc][Ll][Ii][Aa][Tt][Hh] )
             | ( [Cc][Hh][Aa][Ii][Ss][Ll][Ee]{AFADA}[Nn] {Space} [Rr][Ii][Aa][Bb][Hh][Aa][Cc][Hh] )
             | ( [Gg][Cc][Aa][Ii][Ss][Ll][Ee]{AFADA}[Nn] {Space} [Rr][Ii][Aa][Bb][Hh][Aa][Cc][Hh] ) )
 
+MWEORG = ( ( [Ss][Ii][Nn][Nn] {Space} [Ff]{EFADA}[Ii][Nn] )
+           | ( [Ff][Ii][Aa][Nn][Nn][Aa] {Space} [Ff]{AFADA}[Ii][Ll] )
+           | ( [Ff][Ii][Nn][Ee] {Space} [Gg][Aa][Ee][Ll] )
+           | ( [Ll][Uu][Cc][Hh][Tt] {Space} [Oo][Ii][Bb][Rr][Ee] ) )
+
 MWEENG = ( ( ([Dd] {APOS})?[Yy][Oo][Uu] {Space} [Kk][Nn][Oo][Ww] ({Space} [Ww][Hh][Aa][Tt] {Space} [Ii] {Space} [Mm][Ee][Aa][Nn])?)
 | ([Ii] {Space} [Mm][Ee][Aa][Nn])
 | ([Ii] {Space} [Ss][Uu][Pp][Pp][Oo][Ss][Ee])
@@ -346,6 +351,7 @@ Percent = ( {Number}+ "%" )
     public static final int TOKEN_CURRENCY = 19;
     public static final int TOKEN_PERCENT = 20;
     public static final int TOKEN_PLACE = 21;
+    public static final int TOKEN_ORG = 22;
 
     public final int yychar() {
         return yychar;
@@ -380,6 +386,7 @@ Percent = ( {Number}+ "%" )
 {MWE} { return TOKEN_MWE ; }
 {MWEENG} { return TOKEN_MWEENG ; }
 {MWEPLACES} { return TOKEN_PLACE ; }
+{MWEORG} { return TOKEN_ORG ; }
 {INIT} { return TOKEN_INIT ; }
 {Currency} { return TOKEN_CURRENCY ; }
 {Percent} { return TOKEN_PERCENT ; }
