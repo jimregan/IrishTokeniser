@@ -26,7 +26,12 @@
 %option noyywrap
  
 %{
-#include <stdio.h> 
+#include <stdio.h>
+
+static int exclude_xml = 0;
+static int exclude_childes = 0;
+
+char* replace_spaces(char* s);
 %}
  
 ABBR1	(Co\.|gCo\.|Dr\.|eag\.|e\.g\.|i\.e\.|lch\.)
@@ -253,37 +258,62 @@ PTAG	({PTAG1}|{PTAG2}|{PTAG3}|{PTAG4}|{PTAG5}|{PTAG6}|{PTAG7})
 
 %%
 
-{MUTWORD}	printf("MUTWORD: %s\n", yytext);
+{MUTWORD}	printf("%s\n", yytext);
 
-{Email}	printf("WEBADDR: %s\n", yytext);
+{Email}	printf("%s\n", yytext);
 
-{ABBR}	printf("ABBR: %s\n", yytext);
+{ABBR}	printf("%s\n", yytext);
 
-{CONT}	printf("CONT: %s\n", yytext);
+{CONT}	printf("%s\n", yytext);
 
-{MWEENG}	printf("MWEENG: %s\n", yytext);
+{MWEENG}|{MWE}	{
+	char* tmp = replace_spaces((char *)yytext);
+	printf("%s\n", tmp);
+	free(tmp);
+}
 
-{ENGWORD}	printf("ENGWORD: %s\n", yytext);
+{ENGWORD}	printf("%s\n", yytext);
 
-{NOTYPO}	printf("NOTYPO: %s\n", yytext);
+{NOTYPO}	printf("%s\n", yytext);
 
-{MWE}	printf("MWE: %s\n", yytext);
+{CHILDES}	{
+	if(!exclude_childes) {
+		printf("%s\n", yytext);
+	}
+}
 
-{CHILDES}	printf("CHILDES: %s\n", yytext);
+{DIVTAG}|{PTAG}	{
+	if(!exclude_xml) {
+		printf("%s\n", yytext);
+	}
+}
 
-{DIVTAG}	printf("DIVTAG: %s\n", yytext);
+{NONSTD}	printf("%s\n", yytext);
 
-{NONSTD}	printf("NONSTD: %s\n", yytext);
+{WEBADDR}	printf("%s\n", yytext);
 
-{PTAG}	printf("PTAG: %s\n", yytext);
+{Char}+	printf("%s\n", yytext);
 
-{WEBADDR}	printf("URIWeb: %s\n", yytext);
+{WS}+	;
 
-{Char}	printf("Char: %s\n", yytext);
-
-.	printf("Dunno: %s\n", yytext);
+.	printf("%s\n", yytext);
 		
 %%
+
+char* replace_spaces(char* s)
+{
+	char* out = (char *) malloc((strlen(s) + 1) * sizeof(char));
+	char* ret = out;
+	char tmp;
+	if(out != NULL) {
+		while(*s != '\0') {
+			tmp = *s++;
+			*out++ = (tmp == ' ') ? '_' : tmp;
+		}
+	}
+	*out = '\0';
+	return ret;
+}
 
 int main(int argc, char** argv)
 {
