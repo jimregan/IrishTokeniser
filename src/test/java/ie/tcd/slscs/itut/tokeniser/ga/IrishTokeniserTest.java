@@ -1,5 +1,8 @@
 /*
- * Copyright 2016 Trinity College, Dublin
+ * Copyright © 2016 Trinity College, Dublin
+ * Irish Speech and Language Technology Research Centre
+ * Cóipcheart © 2016 Coláiste na Tríonóide, Baile Átha Cliath
+ * An tIonad taighde do Theicneolaíocht Urlabhra agus Teangeolaíochta na Gaeilge
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -20,7 +23,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package ie.tcd.slscs.tokeniser.ga;
+package ie.tcd.slscs.itut.tokeniser.ga;
 
 import org.junit.Test;
 
