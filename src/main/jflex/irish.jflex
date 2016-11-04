@@ -245,7 +245,48 @@ MWE = ( ([Mm][Aa][Rr] {Space} [Aa] {Space} [Dd]{EFADA}[Aa][Rr][Ff]{AFADA})
 | ( [Tt][Hh][Aa][Rr] {Space} [Aa] {Space} [Bb][Hh][Ee][Ii][Tt][Hh] )
 | ( [Tt][Hh][Aa][Rr] {Space} [Cc][Ee][Aa][Nn][Nn] )
 | ( {OFADA} {Space} [Dd][Hh][Ee][Aa][Ss] )
-| ( {OFADA} {Space} [Tt][Hh][Uu][Aa][Ii][Dd][Hh] ) )
+| ( {OFADA} {Space} [Tt][Hh][Uu][Aa][Ii][Dd][Hh] )
+| ( [Mm]{OFADA}[Rr] {Space} [Rr][Oo][Ii][Nn][Nn] ) )
+
+MWEPLACES = ( ( {AFADA}[Tt][Hh] {Space} [Cc][Ll][Ii][Aa][Tt][Hh] )
+            | ( [Bb][Aa][Ii][Ll][Ee] {Space} {AFADA}[Tt][Hh][Aa] {Space} [Cc][Ll][Ii][Aa][Tt][Hh] )
+            | ( [Cc][Oo][Nn][Tt][Aa][Ee] {Space} {AFADA}[Tt][Hh][Aa] {Space} [Cc][Ll][Ii][Aa][Tt][Hh] )
+            | ( [Cc][Ii][Ll][Ll] {Space} [Cc][Hh][Aa][Ii][Nn][Nn][Ii][Gg][Hh] )
+            | ( [Gg][Cc][Ii][Ll][Ll] {Space} [Cc][Hh][Aa][Ii][Nn][Nn][Ii][Gg][Hh] )
+            | ( [Cc][Hh][Ii][Ll][Ll] {Space} [Cc][Hh][Aa][Ii][Nn][Nn][Ii][Gg][Hh] )
+            | ( [Cc][Ii][Ll][Ll] {Space} [Dd][Aa][Rr][Aa] )
+            | ( [Cc][Hh][Ii][Ll][Ll] {Space} [Dd][Aa][Rr][Aa] )
+            | ( [Gg][Cc][Ii][Ll][Ll] {Space} [Dd][Aa][Rr][Aa] )
+            | ( [Cc][Ii][Ll][Ll] {Space} [Mm][Hh][Aa][Nn][Tt]{AFADA}[Ii][Nn] )
+            | ( [Cc][Hh][Ii][Ll][Ll] {Space} [Mm][Hh][Aa][Nn][Tt]{AFADA}[Ii][Nn] )
+            | ( [Gg][Cc][Ii][Ll][Ll] {Space} [Mm][Hh][Aa][Nn][Tt]{AFADA}[Ii][Nn] )
+            | ( [Ll][Oo][Cc][Hh] {Space} [Gg][Aa][Rr][Mm][Aa][Nn] )
+            | ( [Uu]{IFADA}[Bb][Hh] {Space} [Ff][Hh]{AFADA}[Ii][Ll]{IFADA} )
+            | ( [Pp][Oo][Rr][Tt] {Space} [Ll]{AFADA}[Ii][Rr][Gg][Ee] )
+            | ( [Pp][Hh][Oo][Rr][Tt] {Space} [Ll]{AFADA}[Ii][Rr][Gg][Ee] )
+            | ( [Bb][Pp][Oo][Rr][Tt] {Space} [Ll]{AFADA}[Ii][Rr][Gg][Ee] )
+            | ( [Tt][Ii][Oo][Bb][Rr][Aa][Ii][Dd] {Space} {AFADA}[Rr][Aa][Nn][Nn] )
+            | ( [Dd][Tt][Ii][Oo][Bb][Rr][Aa][Ii][Dd] {Space} {AFADA}[Rr][Aa][Nn][Nn] )
+            | ( [Tt][Hh][Ii][Oo][Bb][Rr][Aa][Ii][Dd] {Space} {AFADA}[Rr][Aa][Nn][Nn] )
+            | ( [Mm][Aa][Ii][Gg][Hh] {Space} [Ee][Oo] )
+            | ( [Mm][Hh][Aa][Ii][Gg][Hh] {Space} [Ee][Oo] )
+            | ( [Rr][Oo][Ss] {Space} [Cc][Oo][Mm]{AFADA}[Ii][Nn] )
+            | ( [Aa][Rr][Dd] {Space} [Mm][Hh][Aa][Cc][Hh][Aa] )
+            | ( [Dd]{UFADA}[Nn] {Space} [Nn][Aa] {Space} [Nn][Gg][Aa][Ll][Ll] )
+            | ( [Dd][Hh]{UFADA}[Nn] {Space} [Nn][Aa] {Space} [Nn][Gg][Aa][Ll][Ll] )
+            | ( [Nn][Dd]{UFADA}[Nn] {Space} [Nn][Aa] {Space} [Nn][Gg][Aa][Ll][Ll] )
+            | ( [Ff][Ee][Aa][Rr] {Space} [Mm][Aa][Nn][Aa][Cc][Hh] )
+            | ( [Bb][Hh][Ff][Ee][Aa][Rr] {Space} [Mm][Aa][Nn][Aa][Cc][Hh] )
+            | ( [Ff][Hh][Ee][Aa][Rr] {Space} [Mm][Aa][Nn][Aa][Cc][Hh] )
+            | ( [Tt]{IFADA}[Rr] {Space} [Ee][Oo][Gg][Hh][Aa][Ii][Nn] )
+            | ( [Tt][Hh]{IFADA}[Rr] {Space} [Ee][Oo][Gg][Hh][Aa][Ii][Nn] )
+            | ( [Dd][Tt]{IFADA}[Rr] {Space} [Ee][Oo][Gg][Hh][Aa][Ii][Nn] )
+            | ( [Bb]{EFADA}[Aa][Ll] {Space} [Ff][Ee][Ii][Rr][Ss][Tt][Ee] )
+            | ( [Mm][Bb]{EFADA}[Aa][Ll] {Space} [Ff][Ee][Ii][Rr][Ss][Tt][Ee] )
+            | ( [Bb][Hh]{EFADA}[Aa][Ll] {Space} [Ff][Ee][Ii][Rr][Ss][Tt][Ee] )
+            | ( [Cc][Aa][Ii][Ss][Ll][Ee]{AFADA}[Nn] {Space} [Rr][Ii][Aa][Bb][Hh][Aa][Cc][Hh] )
+            | ( [Cc][Hh][Aa][Ii][Ss][Ll][Ee]{AFADA}[Nn] {Space} [Rr][Ii][Aa][Bb][Hh][Aa][Cc][Hh] )
+            | ( [Gg][Cc][Aa][Ii][Ss][Ll][Ee]{AFADA}[Nn] {Space} [Rr][Ii][Aa][Bb][Hh][Aa][Cc][Hh] ) )
 
 MWEENG = ( ( ([Dd] {APOS})?[Yy][Oo][Uu] {Space} [Kk][Nn][Oo][Ww] ({Space} [Ww][Hh][Aa][Tt] {Space} [Ii] {Space} [Mm][Ee][Aa][Nn])?)
 | ([Ii] {Space} [Mm][Ee][Aa][Nn])
@@ -304,6 +345,7 @@ Percent = ( {Number}+ "%" )
     public static final int TOKEN_ITEM = 18;
     public static final int TOKEN_CURRENCY = 19;
     public static final int TOKEN_PERCENT = 20;
+    public static final int TOKEN_PLACE = 21;
 
     public final int yychar() {
         return yychar;
@@ -337,6 +379,7 @@ Percent = ( {Number}+ "%" )
 {NONSTD} { return TOKEN_NONSTD ; }
 {MWE} { return TOKEN_MWE ; }
 {MWEENG} { return TOKEN_MWEENG ; }
+{MWEPLACES} { return TOKEN_PLACE ; }
 {INIT} { return TOKEN_INIT ; }
 {Currency} { return TOKEN_CURRENCY ; }
 {Percent} { return TOKEN_PERCENT ; }
