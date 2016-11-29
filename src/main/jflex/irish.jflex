@@ -96,7 +96,7 @@ CONT = ( [Mm][Bb] {APOS} | [Bb] {APOS} | [Dd] {APOS}
  | [Aa][Rr][Ss] {APOS} | [Aa] {APOS} [Ss] | [Aa] {APOS}
  | [Nn] {APOS} )
 
-APOS = ( "'" | \u2019 | "&apos;" )
+APOS = ( "'" | \u2019 | "&apos;" | \u0060 | \u00B4 )
 PTAG = ( "<p>" | "</p>" | "<s>" | "</s>"
 | "<title>" | "</title>"
 | "<caption>" | "</caption>"
