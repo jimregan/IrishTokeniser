@@ -267,9 +267,12 @@ PTAG	({PTAG1}|{PTAG2}|{PTAG3}|{PTAG4}|{PTAG5}|{PTAG6}|{PTAG7})
 {CONT}	printf("%s\n", yytext);
 
 {MWEENG}|{MWE}	{
+/*
 	char* tmp = replace_spaces((char *)yytext);
 	printf("%s\n", tmp);
 	free(tmp);
+*/
+	printf("%s"\n", yytext);
 }
 
 {ENGWORD}	printf("%s\n", yytext);
