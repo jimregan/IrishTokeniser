@@ -41,9 +41,10 @@ ABBR4	(\[\?\]|Ph\.D|Msc\.|\.i\.)
 ABBR	({ABBR1}|{ABBR2}|{ABBR3}|{ABBR4})
 XMLEnt	(&quot;|&gt;|&lt;|&apos;)
 
-Space	[ ]
-WS	[ \t\n]
-WORD	({Letter}+)
+RealSpace       [ ]
+NoBreakSpace    \xc2\xa0
+Space   ({RealSpace}|{NoBreakSpace})
+WS      ([ \t\n]|{Space})
 
 Char	[^".,;:!?()\[\]{}'`#&£<>/ \t\n]
 SINGLE = ({SingleCharE}|{SingleCharM})
