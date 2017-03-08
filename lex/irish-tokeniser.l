@@ -28,8 +28,9 @@
 %{
 #include <stdio.h>
 
-static int exclude_xml = 0;
-static int exclude_childes = 0;
+static int exclude_xml = 1;
+static int exclude_childes = 1;
+char sep = ' ';
 
 char* replace_spaces(char* s);
 %}
@@ -41,12 +42,13 @@ ABBR4	(\[\?\]|Ph\.D|Msc\.|\.i\.)
 ABBR	({ABBR1}|{ABBR2}|{ABBR3}|{ABBR4})
 XMLEnt	(&quot;|&gt;|&lt;|&apos;)
 
-RealSpace       [ ]
-NoBreakSpace    \xc2\xa0
-Space   ({RealSpace}|{NoBreakSpace})
-WS      ([ \t\n]|{Space})
+RealSpace	[ ]
+NoBreakSpace	\xc2\xa0
+Space	({RealSpace}|{NoBreakSpace})
+WS	([ \t\n]|{Space})
+WORD	({Letter}+)
 
-Char	[^".,;:!?()\[\]{}'`#&£<>/ \t\n]
+Char	[^"\.,;:!?()\[\]{}'`#&<>/ \t\n]
 SINGLE = ({SingleCharE}|{SingleCharM})
 SYMBOL = ({SINGLE}|{PUNCT})
 Digit	[0-9]
@@ -54,7 +56,8 @@ NumOp	([-=+*/:]|\xC3\xB7)
 PUNCT	(...|``|\'\'|,,|-|\xE2\x80\xA6|\xE2\x80\x9C|\xE2\x80\x9D|\xE2\x80\x98)
 XMLQUOTE	["']
 
-SingleCharE	([".,;:!?()\[\]{}'`#&£<>/]|\xE2\x82\xAC|\xC2\xAE|\xC2\xA1|\xC2\xBF)
+SingleCharEBase	([",;:!?()[\]{}'`#&<>/]|\.)
+SingleCharE	({SingleCharEBase}|\xE2\x82\xAC|\xC2\xAE|\xC2\xA1|\xC2\xBF|\xC2\xA3)
 SingleCharM1	(\xc2\xb0|\xcb\x9a|\xc2\xba|\xc2\xb7|\xc2\xae|\xe2\x87\x92)
 SingleCharM2	(\xe2\x88\x9a|\xc2\xb1|\xe2\x88\x9d|\xce\xb1|\xe2\x84\xa6)
 SingleCharM3	(\xce\xa9|\xcf\x81|\xce\xa1|\xe2\x80\xa2|\xc2\xb5|\xcf\x80)
@@ -249,58 +252,62 @@ PTAG1	(<p>|<\/p>|<s>|<\/s>|<title>|<\/title>|<caption>|<\/caption>)
 PTAG2	(<head>|<\/head>|<\/hi>|<hi{Space}rend={XMLQUOTE}(bo|it){XMLQUOTE}>)
 PTAG3	(<gap\/>|<gap>|<\/gap>|<span>|<\/span>|<text>|<\/text>)
 PTAG4	(<foreign>|<\/foreign>|<div>|<\/div>|<poem>|<\/poem>|<body>|<\/body>)
+PTAG5	(<div1>|<\/div1>)
 GAPSTART	<gap{Space}desc\={XMLQUOTE}
 GAP1	(Old{Space}Irish|english{Space}text|german{Space}text|german)
 GAP2	(english|french|spanish|welsh|latin|bibl|glossary|note|table|contact_info)
-PTAG5	{GAPSTART}({GAP1}|{GAP2})\/>
-PTAG6	<foreign{Space}lang\={XMLQUOTE}(en|fr|la){XMLQUOTE}>
-PTAG7	(<lb>|<\/lb>|<l>|<\/l>|<lg>|<\/lg>|<\/speaker_turn>)
-PTAG	({PTAG1}|{PTAG2}|{PTAG3}|{PTAG4}|{PTAG5}|{PTAG6}|{PTAG7})
+PTAG6	{GAPSTART}({GAP1}|{GAP2})\/>
+PTAG7	<foreign{Space}lang\={XMLQUOTE}(en|fr|la){XMLQUOTE}>
+PTAG8	(<lb>|<\/lb>|<l>|<\/l>|<lg>|<\/lg>|<\/speaker_turn>)
+PTAG	({PTAG1}|{PTAG2}|{PTAG3}|{PTAG4}|{PTAG5}|{PTAG6}|{PTAG7}|{PTAG8})
 
 %%
 
-{MUTWORD}	printf("%s\n", yytext);
+{APOS}	printf("'%c", sep);
 
-{Email}	printf("%s\n", yytext);
+\xC2\xA3	printf("£%c", sep);
 
-{ABBR}	printf("%s\n", yytext);
+{SingleCharM}	printf("%s%c", yytext, sep);
 
-{CONT}	printf("%s\n", yytext);
+{SingleCharE}	printf("%s%c", yytext, sep);
+
+{MUTWORD}	printf("%s%c", yytext, sep);
+
+{Email}	printf("%s%c", yytext, sep);
+
+{ABBR}	printf("%s%c", yytext, sep);
+
+{CONT}	printf("%s%c", yytext, sep);
 
 {MWEENG}|{MWE}	{
-/*
-	char* tmp = replace_spaces((char *)yytext);
-	printf("%s\n", tmp);
-	free(tmp);
-*/
-	printf("%s"\n", yytext);
+	printf("%s%c", yytext, sep);
 }
 
-{ENGWORD}	printf("%s\n", yytext);
+{ENGWORD}	printf("%s%c", yytext, sep);
 
-{NOTYPO}	printf("%s\n", yytext);
+{NOTYPO}	printf("%s%c", yytext, sep);
 
 {CHILDES}	{
 	if(!exclude_childes) {
-		printf("%s\n", yytext);
+		printf("%s%c", yytext, sep);
 	}
 }
 
 {DIVTAG}|{PTAG}	{
 	if(!exclude_xml) {
-		printf("%s\n", yytext);
+		printf("%s%c", yytext, sep);
 	}
 }
 
-{NONSTD}	printf("%s\n", yytext);
+{NONSTD}	printf("%s%c", yytext, sep);
 
-{WEBADDR}	printf("%s\n", yytext);
+{WEBADDR}	printf("%s%c", yytext, sep);
 
-{Char}+	printf("%s\n", yytext);
+{Char}+	printf("%s%c", yytext, sep);
 
 {WS}+	;
 
-.	printf("%s\n", yytext);
+.	printf("%s%c", yytext, sep);
 		
 %%
 
