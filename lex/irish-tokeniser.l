@@ -30,7 +30,7 @@
 
 static int exclude_xml = 1;
 static int exclude_childes = 1;
-char sep = ' ';
+char sep = '\n';
 
 char* replace_spaces(char* s);
 %}
